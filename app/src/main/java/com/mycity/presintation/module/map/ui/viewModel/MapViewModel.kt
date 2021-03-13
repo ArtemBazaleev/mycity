@@ -15,9 +15,6 @@ import kotlin.math.ln
 class MapViewModel: ViewModel() {
 
     @Inject
-    lateinit var app: App
-
-    @Inject
     lateinit var markers: GetMapMarkersUseCase
 
     init {
@@ -27,7 +24,6 @@ class MapViewModel: ViewModel() {
     val liveMarkers: MutableLiveData<List<MarkerEntityResponse>> = MutableLiveData()
 
     fun requestMarkers(lat: Double = 0.0, lng: Double = 0.0) {
-        app.applicationContext
         viewModelScope.launch {
             markers.execute(
                 params = GetMapMarkersParams(lat, lng),

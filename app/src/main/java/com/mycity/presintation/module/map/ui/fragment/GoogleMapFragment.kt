@@ -43,23 +43,12 @@ class GoogleMapFragment: BaseMapFragment<FragmentGoogleMapBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-        initListeners()
     }
 
-    private fun initListeners() {
-        mapViewModel?.liveMarkers?.observe(viewLifecycleOwner, Observer {
-            handleMarkers(it)
-        })
-    }
-
-    private fun handleMarkers(markers: List<MarkerEntityResponse>?) {
+    override fun handleMarkers(markers: List<MarkerEntityResponse>?) {
         markers?.forEach {
             val location = LatLng(it.markerLat, it.markerLon)
-
-            val marker = gMap?.addMarker(MarkerOptions()
-                .position(location)
-                .title("Marker in Sydney")
-            )
+            val marker = gMap?.addMarker(MarkerOptions().position(location))
             marker?.tag = it.markerLat+it.markerLon
         }
     }
