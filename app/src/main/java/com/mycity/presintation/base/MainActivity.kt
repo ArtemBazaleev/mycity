@@ -11,14 +11,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initFragment()
-    }
-
-    private fun initFragment() {
-        val fragment = MapsFragment()
-        val fm = supportFragmentManager
-        fm.beginTransaction()
-            .add(R.id.fl_root,fragment)
-            .commit()
     }
 }
