@@ -2,6 +2,9 @@ package com.mycity
 
 
 import android.app.Application
+import com.mycity.di.ApplicationComponent
+import com.mycity.di.ApplicationModule
+import com.mycity.di.DaggerApplicationComponent
 
 class App: Application() {
 
@@ -11,6 +14,13 @@ class App: Application() {
     }
 
     private fun initDagger() {
+        component = DaggerApplicationComponent
+            .builder()
+            .applicationModule(ApplicationModule(this))
+            .build()
+    }
 
+    companion object {
+        lateinit var component: ApplicationComponent
     }
 }
