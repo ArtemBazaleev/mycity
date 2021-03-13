@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import com.mycity.R
 import com.mycity.presintation.module.map.ui.fragment.GoogleMapFragment
+import com.mycity.presintation.module.map.ui.fragment.MapsFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFragment() {
-        val fragment = GoogleMapFragment()
+        val fragment = MapsFragment()
         val fm = supportFragmentManager
         fm.beginTransaction()
             .add(R.id.fl_root,fragment)
