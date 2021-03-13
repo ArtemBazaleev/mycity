@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.viewbinding.ViewBinding
 import com.mycity.presintation.base.BaseFragmentNew
 import com.mycity.presintation.module.map.data.entity.MarkerEntityResponse
