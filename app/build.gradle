@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -41,6 +42,7 @@ ext {
     daggerVersion = '2.33'
     kotlinx_coroutines_version = '1.4.2'
     lifecycle = '2.2.0'
+    nav_version = "2.3.4"
 }
 
 dependencies {
@@ -73,4 +75,8 @@ dependencies {
 
     // firebase
     implementation 'com.google.firebase:firebase-database:19.7.0'
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

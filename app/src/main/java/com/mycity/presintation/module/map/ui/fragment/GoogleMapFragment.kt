@@ -11,14 +11,16 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mycity.R
 import com.mycity.databinding.FragmentGoogleMapBinding
 import com.mycity.presintation.module.map.data.entity.MarkerEntityResponse
 
-class GoogleMapFragment: BaseMapFragment<FragmentGoogleMapBinding>() {
+class GoogleMapFragment : BaseMapFragment<FragmentGoogleMapBinding>() {
 
     private var gMap: GoogleMap? = null
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         gMap = googleMap
@@ -43,23 +45,12 @@ class GoogleMapFragment: BaseMapFragment<FragmentGoogleMapBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-        initListeners()
     }
 
-    private fun initListeners() {
-        mapViewModel?.liveMarkers?.observe(viewLifecycleOwner, Observer {
-            handleMarkers(it)
-        })
-    }
-
-    private fun handleMarkers(markers: List<MarkerEntityResponse>?) {
+    override fun handleMarkers(markers: List<MarkerEntityResponse>?) {
         markers?.forEach {
             val location = LatLng(it.markerLat, it.markerLon)
-
-            val marker = gMap?.addMarker(MarkerOptions()
-                .position(location)
-                .title("Marker in Sydney")
-            )
+            val marker = gMap?.addMarker(MarkerOptions().position(location))
             marker?.tag = it.markerLat+it.markerLon
         }
     }
