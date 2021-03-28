@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mycity.R
 import com.mycity.databinding.FragmentGoogleMapBinding
@@ -19,6 +20,7 @@ import com.mycity.presintation.module.map.data.entity.MarkerEntityResponse
 class GoogleMapFragment : BaseMapFragment<FragmentGoogleMapBinding>() {
 
     private var gMap: GoogleMap? = null
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         gMap = googleMap

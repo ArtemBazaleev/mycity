@@ -1,5 +1,6 @@
 package com.mycity.presintation.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,12 +21,25 @@ abstract class BaseFragmentNew<T : ViewBinding> : Fragment() {
 
     private var navigationController: NavController? = null
 
+    protected var act: MainActivity? = null
+
+
     protected val binding: T?
         get() = _binding
 
     private var _binding: T? = null
 
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> T
+
+    override fun onAttach(context: Context) {
+        act = activity as? MainActivity
+        super.onAttach(context)
+    }
+
+    override fun onDetach() {
+        act = null
+        super.onDetach()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
