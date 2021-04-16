@@ -6,20 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.IdRes
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragmentNew<T : ViewBinding> : Fragment() {
+abstract class BaseFragmentNew<T : ViewBinding> : Fragment(), Navigator {
 
     companion object {
         private const val BASE_FRAGMENT_TAG = "baseFragmentTag"
     }
-
-    private var navigationController: NavController? = null
 
     protected var act: MainActivity? = null
 
@@ -49,26 +43,37 @@ abstract class BaseFragmentNew<T : ViewBinding> : Fragment() {
         return requireNotNull(_binding).root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navigationController = Navigation.findNavController(view)
+    override fun addFragment(navigationId: Int, addToBackStack: Boolean?) {
+        act?.navigation?.addFragment(navigationId)
     }
 
-    fun addFragment(@IdRes destinationId: Int, vararg data: Arg) {
-        val arg = mutableListOf<Pair<String, Any>>()
-        data.forEach {
-            arg.add(Pair(it.key, it.arg))
-        }
-        val bundle: Bundle = bundleOf(*arg.toTypedArray())
-        navigationController?.navigate(destinationId, bundle)
+    override fun addFragment(navigationId: Int, addToBackStack: Boolean?, vararg data: Arg) {
+        act?.navigation?.addFragment(navigationId, *data)
     }
 
-    fun addFragment(@IdRes destinationId: Int) {
-        navigationController?.navigate(destinationId)
+    override fun backToCurrentFragment(navigationId: Int) {
+        act?.navigation?.backToCurrentFragment(navigationId)
     }
 
-    fun popBackStack() {
-        navigationController?.popBackStack()
+    override fun addFragmentWithAnim(
+        navigationId: Int,
+        addToBackStack: Boolean?,
+        type: AppNavigation.NavigationAnimType
+    ) {
+       act?.navigation?.addFragmentWithAnim(navigationId, type)
+    }
+
+    override fun addFragmentWithAnim(
+        navigationId: Int,
+        addToBackStack: Boolean?,
+        vararg data: Arg,
+        type: AppNavigation.NavigationAnimType
+    ) {
+
+    }
+
+    override fun popBackStack() {
+        act?.navigation?.popBackStack()
     }
 
     override fun onDestroyView() {
