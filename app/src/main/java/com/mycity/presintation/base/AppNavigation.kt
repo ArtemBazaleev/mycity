@@ -27,14 +27,17 @@ class AppNavigation(
     }
 
     /**
-     * Обязательно вызвать этот метод, инициализация Controller
+     * Обязательно вызвать этот метод
+     * Получает NavHostFragment и инициализируется NavController
      */
     fun initBase() {
-        val navHostFragment =
-            getFragmentManager()?.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-        navigation = navHostFragment.navController
+        try {
+            val navHostFragment = getFragmentManager()?.findFragmentById(R.id.fl_root) as NavHostFragment
+            navigation = navHostFragment.navController
+        } catch (e: Exception) {
+            Log.d(APP_NAVIGATION_TAG, "error getting nav controller: $e")
+        }
     }
-
 
     fun addFragment(@IdRes destinationId: Int, vararg data: Arg) {
         val arg = mutableListOf<Pair<String, Any>>()
@@ -48,6 +51,7 @@ class AppNavigation(
 
 
     fun addFragment(@IdRes destinationId: Int) {
+        Log.d(APP_NAVIGATION_TAG, "addFragment destination -> $destinationId")
         navigation?.navigate(destinationId)
     }
 

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragmentNew<T : ViewBinding> : Fragment(), Navigator {
+abstract class BaseFragment<T : ViewBinding> : Fragment(), Navigator {
 
     companion object {
         private const val BASE_FRAGMENT_TAG = "baseFragmentTag"
@@ -69,7 +69,7 @@ abstract class BaseFragmentNew<T : ViewBinding> : Fragment(), Navigator {
         vararg data: Arg,
         type: AppNavigation.NavigationAnimType
     ) {
-
+        act?.navigation?.addFragmentWithAnim(navigationId, *data, type = type)
     }
 
     override fun popBackStack() {
