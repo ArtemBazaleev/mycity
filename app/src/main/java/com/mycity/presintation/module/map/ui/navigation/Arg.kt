@@ -1,5 +1,4 @@
-package com.mycity.presintation.base
-
+package com.mycity.presintation.module.map.ui.navigation
 
 data class Arg(
     val key: String,

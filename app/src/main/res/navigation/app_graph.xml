@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_graph"
     app:startDestination="@id/mapsFragment">
+
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.mycity.presintation.module.map.ui.fragment.GoogleMapFragment"
@@ -14,6 +15,7 @@
             android:id="@+id/action_mapsFragment_to_testFragment2"
             app:destination="@id/testFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/testFragment"
         android:name="com.mycity.presintation.module.map.ui.fragment.TestFragment"

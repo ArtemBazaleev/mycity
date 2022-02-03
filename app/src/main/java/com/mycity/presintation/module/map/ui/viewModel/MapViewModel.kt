@@ -13,27 +13,27 @@ import javax.inject.Inject
 
 class MapViewModel: ViewModel() {
 
-//    @Inject
-//    lateinit var markers: GetMapMarkersUseCase
+    @Inject
+    lateinit var markers: GetMapMarkersUseCase
 
     init {
-//        App.component.inject(this)
+        App.component.inject(this)
     }
 
     val liveMarkers: MutableLiveData<List<MarkerEntityResponse>> = MutableLiveData()
 
     fun requestMarkers(lat: Double = 0.0, lng: Double = 0.0) {
-//        viewModelScope.launch {
-//            markers.execute(
-//                params = GetMapMarkersParams(lat, lng),
-//                success = {
-//                    liveMarkers.postValue(it)
-//                },
-//                fail = {
-//
-//                }
-//            )
-//        }
+        viewModelScope.launch {
+            markers.execute(
+                params = GetMapMarkersParams(lat, lng),
+                success = {
+                    liveMarkers.postValue(it)
+                },
+                fail = {
+
+                }
+            )
+        }
     }
 
 }

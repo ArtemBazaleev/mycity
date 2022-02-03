@@ -1,6 +1,5 @@
 package com.mycity
 
-
 import android.app.Application
 import com.mycity.di.ApplicationComponent
 import com.mycity.di.ApplicationModule

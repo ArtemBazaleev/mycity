@@ -26,6 +26,7 @@ class GetMapMarkersUseCase @Inject constructor(
 
 }
 
+
 class GetMapMarkersParams(
     var lat: Double,
     var lng: Double
