@@ -1,9 +1,10 @@
-package com.mycity.di
+package com.mycity.di.actsubcomponent
 
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
+import com.mycity.di.actsubcomponent.ActivityScope
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class ActivityModule constructor(

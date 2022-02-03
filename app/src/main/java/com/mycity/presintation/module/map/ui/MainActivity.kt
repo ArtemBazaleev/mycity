@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.mycity.App
 import com.mycity.R
 import com.mycity.databinding.ActivityMainBinding
 import com.mycity.presintation.base.DefConstants
@@ -20,6 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        App.actSubComponent?.inject(this)
         initLightStatusBar()
         setUpWithBottomNav()
         doDelayed(1500) {
@@ -28,7 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun setUpWithBottomNav() {
-        setUpWithNavController(binding?.bottomBar, navigator?.getController())
+        setUpWithNavController(binding?.bottomBar, navigator.getController())
     }
 
     private fun initLightStatusBar() {

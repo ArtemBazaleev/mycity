@@ -1,6 +1,5 @@
 package com.mycity.presintation.module.map.ui.viewModel
 
-
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +7,7 @@ import com.mycity.App
 import com.mycity.presintation.module.map.data.entity.MarkerEntityResponse
 import com.mycity.presintation.module.map.domain.GetMapMarkersParams
 import com.mycity.presintation.module.map.domain.GetMapMarkersUseCase
+import com.mycity.presintation.module.map.ui.navigation.Navigator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

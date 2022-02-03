@@ -1,4 +1,4 @@
-package com.mycity.di
+package com.mycity.di.actsubcomponent
 
 import javax.inject.Scope
 

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.mycity.presintation.module.map.ui.navigation.NavigationController
+import com.mycity.App
+import com.mycity.di.DaggerApplicationComponent
+import com.mycity.di.actsubcomponent.ActivityModule
 import com.mycity.presintation.module.map.ui.navigation.Navigator
+import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
@@ -14,7 +17,8 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     protected val binding: B?
         get() = _binding
 
-    var navigator: Navigator? = null
+    @Inject
+    lateinit var navigator: Navigator
 
     protected abstract val bindingInflater: (layoutInflater: LayoutInflater) -> B
 
@@ -25,15 +29,26 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initNavigation()
+        initActComponent()
     }
 
-    private fun initNavigation() {
-        navigator = NavigationController(supportFragmentManager)
+    private fun initActComponent() {
+//        App.actSubComponent = App.component.activitySubComponentBuilder()
+//            .setActivityModule(ActivityModule(this))
+//            .build()
+        App.actSubComponent = DaggerApplicationComponent.create()
+            .activitySubComponentBuilder()
+            .setActivityModule(ActivityModule(this))
+            .build()
     }
 
     private fun initView() {
         _binding = bindingInflater(layoutInflater)
         setContentView(requireNotNull(binding?.root))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.actSubComponent = null
     }
 }

@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.mycity.R
 import com.mycity.databinding.FragmentGoogleMapBinding
@@ -21,6 +19,7 @@ class GoogleMapFragment : BaseMapFragment<FragmentGoogleMapBinding>() {
 
     private var gMap: GoogleMap? = null
 
+    private var isopen = false
 
     private val callback = OnMapReadyCallback { googleMap ->
         gMap = googleMap
@@ -45,6 +44,10 @@ class GoogleMapFragment : BaseMapFragment<FragmentGoogleMapBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+        if (!isopen) {
+            isopen = true
+            addFragment(R.id.testFragment)
+        }
     }
 
     override fun handleMarkers(markers: List<MarkerEntityResponse>?) {
